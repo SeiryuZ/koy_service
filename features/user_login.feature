@@ -9,11 +9,11 @@ Feature: Signing in
       | username | password | admin |  
       |  steven  | password | false |  
       |  admin   |  admin   | true  |  
-    And user on home page
-    When he typed <"username"> to "username"
-    And he typed <"password"> to "password"
-    And he clicked "login"
-    Then he should see <"result">
+    And I am on home page
+    When I type <"username"> to "username"
+    And I type <"password"> to "password"
+    And I click "login"
+    Then I should see <"result">
 
     Examples:
       | username | password |           result            |  

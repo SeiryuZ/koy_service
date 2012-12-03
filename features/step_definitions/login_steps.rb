@@ -1,4 +1,10 @@
-Given /^user on home page$/ do
+
+
+When /^I click "(.*?)"$/  do |target|
+  page.click_on(target)
+end
+
+Given /^I am on home page$/ do
   visit "/"
 end
 
@@ -11,14 +17,12 @@ Given /^the following user exist$/ do |table|
   end
 end
 
-When /^he typed <"(.*?)"> to "(.*?)"$/ do |input, target|
-  fill_in target, :with => input
+When /^I type <"(.*?)"> to "(.*?)"$/ do |input, target|
+  page.fill_in target, :with => input
 end
 
-When /^he clicked "(.*?)"$/ do |target|
-  clicked_on target
-end
 
-Then /^he should see <"(.*?)">$/ do |content|
+
+Then /^I should see <"(.*?)">$/ do |content|
   page.should have_content content
 end

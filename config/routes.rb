@@ -12,8 +12,10 @@ KoyService::Application.routes.draw do
 
   get "user/login"
 
-  root :to => 'users#login'
-  resources :users
+  match "login" => "user#login", :as => :login
+
+  root :to => 'user#login'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

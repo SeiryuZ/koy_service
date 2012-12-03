@@ -1,0 +1,25 @@
+.row
+  .span12.center
+    Login
+%br
+%br
+.row
+  =form_tag("/login", :method => :post)
+  .span4.offset4
+    %table
+      %tr
+        %td
+          =label_tag "username", "Username"
+        %td
+          = text_field_tag "username", "Username"
+      %tr
+        %td
+          =label_tag "password", "Password"
+        %td
+          = text_field_tag "password", "Password"
+      %tr
+        %td
+          &nbsp;
+        %td
+          = submit_tag "login", :id=>"login", :class=>"login"
+    
