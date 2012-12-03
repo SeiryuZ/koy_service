@@ -8,6 +8,7 @@ gem 'rails', '3.2.9'
 
 gem 'thin'
 gem 'mysql2'
+gem 'haml'
 
 group :development, :test do
   gem 'mysql2'

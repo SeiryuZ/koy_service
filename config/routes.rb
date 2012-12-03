@@ -1,4 +1,19 @@
 KoyService::Application.routes.draw do
+
+  get "user/index"
+
+  get "user/new"
+
+  get "user/create"
+
+  get "user/update"
+
+  get "user/edit"
+
+  get "user/login"
+
+  root :to => 'users#login'
+  resources :users
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

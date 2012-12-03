@@ -4,7 +4,10 @@ end
 
 Given /^the following user exist$/ do |table|
   table.hashes.each do |hash|
-    User.create(hash)
+    user = User.new()
+    user.username = hash[:username]
+    user.password = hash[:password]
+    user.save!
   end
 end
 
