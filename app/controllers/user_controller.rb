@@ -15,6 +15,14 @@ class UserController < ApplicationController
   def edit
   end
 
+  def logout
+    session[:active_user] = nil
+
+    flash[:notice] = "Anda telah berhasil logout"
+
+    redirect_to root_path
+  end
+
   def login
 
     if request.post?

@@ -1,7 +1,7 @@
 
 
 When /^I click "(.*?)"$/  do |target|
-  page.click_on(target)
+  page.find("##{target}").click()
 end
 
 Given /^I am on "(.*?)"$/ do |target|
@@ -37,6 +37,6 @@ end
 
 When /^I am authenticated$/ do
   page.fill_in "username", :with => "admin"
-  page.fill_in "password", :with => "passwordadmin"
+  page.fill_in "password", :with => "admin"
   page.click_on("login")
 end

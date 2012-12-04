@@ -61,6 +61,17 @@ describe UserController do
     end
   end
 
+  describe "GET 'logout'" do
+    it "should destroy active user session and redirected to login page" do
+      session[:active_user] = User.find_by_username("admin").id
+      session[:active_user].should_not == nil
+      get 'logout'
+      session[:active_user].should == nil
+      response.should redirect_to(root_path)
+      
+    end
+  end
+
   describe "POST 'login'" do
     it "should redirect to login page if authentication fail" do
       post 'login', :username => "admin", :password => "password"

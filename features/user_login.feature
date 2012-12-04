@@ -29,7 +29,6 @@ Feature: Signing in
       |  admin   |  admin   | true  | 
     And I am on "home page"
     When I am authenticated
-    And I am on "user index"
     And I click "logout"
     Then I should see "Anda telah berhasil logout"
 
