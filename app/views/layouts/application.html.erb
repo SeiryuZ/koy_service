@@ -8,12 +8,22 @@
 </head>
 <body>
   <div class="container">
+    <div class="row">
+      <div class="span3.offset9">
+        <% if @active_user %>
+          Hi <%= @active_user.username + (@active_user.is_admin? ? "[admin]" : "" ) %>, 
+          &nbsp;&nbsp;
+          = button_tag "logout", :class => "btn btn-danger btn-large", :id=>"logout"
+        <% end %>
+      </div>
+    </div>
     <% flash.each do | type, message | %>
       <div class="alert <%= (type=="success") ? "alert-success" : "" %>">
         <button class="close" data-dismiss="alert">X</button>
         <%= message %>
       </div>
     <% end %>
+
     <%= yield %>
   </div>
 </body>

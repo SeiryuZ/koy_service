@@ -3,7 +3,7 @@ class UserController < ApplicationController
   end
 
   def new
-    
+
   end
 
   def create
@@ -20,7 +20,7 @@ class UserController < ApplicationController
     if request.post?
       @user = User.find_by_username(params[:username])
       if @user and @user.password == params[:password]
-        flash[:success] = "Hi #{@user.username}".to_s + (@user.is_admin? ? "[admin]" : "")
+        
         session[:active_user] = @user.id
         redirect_to :action => "index"
       else

@@ -9,7 +9,7 @@ Feature: Signing in
       | username | password | admin |  
       |  steven  | password | false |  
       |  admin   |  admin   | true  |  
-    And I am on home page
+    And I am on "home page"
     When I type "<username>" to "username"
     And I type "<password>" to "password"
     And I click "login"
@@ -22,11 +22,14 @@ Feature: Signing in
       |  admin   | password | Maaf, Password anda salah |  
       |  admin   |  admin   |      Hi admin[admin]      |  
 
-  Scenario Outline: Logout
+  Scenario: Logout
     Given the following user exist
       | username | password | admin |  
       |  steven  | password | false |  
       |  admin   |  admin   | true  | 
-    And I am authenticated
-    Then I should see ""
+    And I am on "home page"
+    When I am authenticated
+    And I am on "user index"
+    And I click "logout"
+    Then I should see "Anda telah berhasil logout"
 
