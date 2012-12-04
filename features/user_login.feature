@@ -4,7 +4,7 @@ Feature: Signing in
   I want to login
 
 
-  Scenario Outline: Valid Login
+  Scenario Outline: Login
     Given the following user exist
       | username | password | admin |  
       |  steven  | password | false |  
@@ -18,5 +18,15 @@ Feature: Signing in
     Examples:
       | username | password |          result           |  
       |  steven  | password |         Hi steven         |  
+      |  steven  | password |          logout           |  
       |  admin   | password | Maaf, Password anda salah |  
       |  admin   |  admin   |      Hi admin[admin]      |  
+
+  Scenario Outline: Logout
+    Given the following user exist
+      | username | password | admin |  
+      |  steven  | password | false |  
+      |  admin   |  admin   | true  | 
+    And I am authenticated
+    Then I should see ""
+

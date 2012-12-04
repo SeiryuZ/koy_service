@@ -10,36 +10,46 @@ describe UserController do
   end
 
   describe "GET 'index'" do
-    it "returns http success" do
+    it "should redirect to root if not logged in" do
       get 'index'
-      response.should be_success
+      response.should redirect_to root_path
     end
   end
 
   describe "GET 'new'" do
-    it "returns http success" do
+    it "should redirect to root if not logged in" do
       get 'new'
+      response.should redirect_to root_path
+    end
+
+    it "should render the new user page if logged in" do
+      session[:active_user] = User.find_by_username("admin").id
       response.should be_success
     end
   end
 
   describe "GET 'create'" do
-    it "returns http success" do
+    it "should redirect to root if not logged in" do
       get 'create'
-      response.should be_success
+      response.should redirect_to root_path
     end
   end
 
   describe "GET 'update'" do
-    it "returns http success" do
+    it "should redirect to root if not logged in" do
       get 'update'
-      response.should be_success
+      response.should redirect_to root_path
     end
   end
 
   describe "GET 'edit'" do
-    it "returns http success" do
+    it "should redirect to root if not logged in" do
       get 'edit'
+      response.should redirect_to root_path
+    end
+
+    it "should render the new user page if logged in" do
+      session[:active_user] = User.find_by_username("admin").id
       response.should be_success
     end
   end
@@ -61,6 +71,8 @@ describe UserController do
 
     it "should redirect to index page if authentication succeed" do
       post 'login', :username => "admin", :password => "passwordadmin"
+      
+      session[:active_user].should == User.find_by_username("admin").id
       response.should redirect_to(user_index_path)
     end
 
