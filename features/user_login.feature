@@ -10,13 +10,13 @@ Feature: Signing in
       |  steven  | password | false |  
       |  admin   |  admin   | true  |  
     And I am on home page
-    When I type <"username"> to "username"
-    And I type <"password"> to "password"
+    When I type "<username>" to "username"
+    And I type "<password>" to "password"
     And I click "login"
-    Then I should see <"result">
+    Then I should see "<result>"
 
     Examples:
-      | username | password |           result            |  
-      |  steven  | password |         "Hi Steven"         |  
-      |  admin   | password | "Maaf, Password anda salah" |  
-      |  admin   |  admin   |      "Hi admin[admin]"      |  
+      | username | password |          result           |  
+      |  steven  | password |         Hi steven         |  
+      |  admin   | password | Maaf, Password anda salah |  
+      |  admin   |  admin   |      Hi admin[admin]      |  

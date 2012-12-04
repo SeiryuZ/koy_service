@@ -5,7 +5,7 @@ When /^I click "(.*?)"$/  do |target|
 end
 
 Given /^I am on home page$/ do
-  visit "/"
+  visit root_path
 end
 
 Given /^the following user exist$/ do |table|
@@ -13,16 +13,17 @@ Given /^the following user exist$/ do |table|
     user = User.new()
     user.username = hash[:username]
     user.password = hash[:password]
+    user.set_admin = hash[:admin]
     user.save!
   end
 end
 
-When /^I type <"(.*?)"> to "(.*?)"$/ do |input, target|
+When /^I type "(.*?)" to "(.*?)"$/ do |input, target|
   page.fill_in target, :with => input
 end
 
 
 
-Then /^I should see <"(.*?)">$/ do |content|
-  page.should have_content content
+Then /^I should see "(.*?)"$/ do |content|
+  page.text.should include content
 end

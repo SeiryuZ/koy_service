@@ -19,8 +19,10 @@ class UserController < ApplicationController
     if request.post?
       @user = User.find_by_username(params[:username])
       if @user and @user.password == params[:password]
+        flash[:success] = "Hi #{@user.username}".to_s + (@user.is_admin? ? "[admin]" : "")
         redirect_to :action => "index"
       else
+        flash[:error] = "Maaf, Password anda salah"
         redirect_to root_path
       end
     end
