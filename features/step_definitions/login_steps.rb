@@ -30,13 +30,23 @@ end
 
 
 
-Then /^I should see "(.*?)"$/ do |content|
-  page.text.should include content
+Then /^I should (not )?see "(.*?)"$/ do |flag, content|
+  if not flag
+    page.text.should include content
+  else
+    page.text.should_not include content
+  end
 end
 
 
-When /^I am authenticated$/ do
-  page.fill_in "username", :with => "admin"
-  page.fill_in "password", :with => "admin"
-  page.click_on("login")
+When /^I am authenticated as "(.*?)"$/ do |target|
+  if target == "admin"
+    page.fill_in "username", :with => "admin"
+    page.fill_in "password", :with => "admin"
+    page.click_on("login")
+  else
+    page.fill_in "username", :with => "steven"
+    page.fill_in "password", :with => "password"
+    page.click_on("login")
+  end
 end

@@ -28,7 +28,7 @@ Feature: Signing in
       |  steven  | password | false |  
       |  admin   |  admin   | true  | 
     And I am on "home page"
-    When I am authenticated
+    When I am authenticated as "steven"
     And I click "logout"
     Then I should see "Anda telah berhasil logout"
 

@@ -9,6 +9,7 @@ gem 'rails', '3.2.9'
 gem 'thin'
 gem 'mysql2'
 gem 'haml-rails'
+gem 'rb-inotify'
 
 group :development, :test do
   gem 'mysql2'
