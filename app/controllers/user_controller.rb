@@ -1,5 +1,11 @@
 class UserController < ApplicationController
   def index
+    if @active_user.is_admin?
+      @users = User.find(:all, :limit => 50)
+      render "index_admin"
+    else
+      render "index"
+    end
   end
 
   def new

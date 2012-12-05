@@ -14,6 +14,7 @@ Feature: Users Management
     Then I should see "Daftar User"
     And I should see "steven"
     And I should see "admin"
+    And I should see "user-table" element
 
   Scenario: Should not see list of user as non admin
     Given the following user exist
@@ -23,5 +24,5 @@ Feature: Users Management
     And I am on "home page"
     When I am authenticated as "steven"
     Then I should not see "Daftar User"
-    And I should not see "steven"
     And I should not see "admin"
+    And I should not see "user-table" element

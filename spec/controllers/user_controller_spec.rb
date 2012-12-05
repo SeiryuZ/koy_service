@@ -6,13 +6,32 @@ describe UserController do
     @user = User.new()
     @user.username = "admin"
     @user.password = "passwordadmin"
+    @user.set_admin = true
     @user.save
+
+    @user2 = User.new()
+    @user2.username = "steven"
+    @user2.password = "password"
+    @user2.set_admin = false
+    @user2.save
   end
 
   describe "GET 'index'" do
     it "should redirect to root if not logged in" do
       get 'index'
       response.should redirect_to root_path
+    end
+
+    it "should render index_admin page if logged in as admin" do
+      session[:active_user] = User.find_by_username("admin").id
+      get 'index'
+      response.should render_template("index_admin")
+    end
+
+    it "should render index page if logged in as non admin" do
+      session[:active_user] = User.find_by_username("steven").id
+      get 'index'
+      response.should render_template("index")
     end
   end
 
@@ -24,6 +43,7 @@ describe UserController do
 
     it "should render the new user page if logged in" do
       session[:active_user] = User.find_by_username("admin").id
+      get 'new'
       response.should be_success
     end
   end

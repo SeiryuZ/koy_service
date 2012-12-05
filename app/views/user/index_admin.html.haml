@@ -1,0 +1,22 @@
+.row
+  .span12.center
+    %h1
+      Daftar User
+%br
+%hr
+.row
+  .span4.offset4
+    %table.table.table-bordered#user-table
+      %thead
+        %th
+          Username
+        %th
+          Admin ?
+        %th
+      %tbody
+        -@users.each do |user|
+          %tr
+            %td
+              = user.username
+            %td
+              = user.is_admin?
