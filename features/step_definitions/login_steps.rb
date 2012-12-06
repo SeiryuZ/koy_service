@@ -16,9 +16,9 @@ end
 
 Given /^the following user exist$/ do |table|
   table.hashes.each do |hash|
-    user = User.new()
-    user.username = hash[:username]
-    user.password = hash[:password]
+    user = build(:user, :username=>hash[:username], 
+      :password => hash[:password], 
+      :password_confirmation => hash[:password] )
     user.set_admin = hash[:admin]
     user.save!
   end

@@ -1,0 +1,38 @@
+
+= form_for @user, :url => {:action => zone } do |f|
+  
+  .row
+    .span6.offset3
+      -if @user.errors.any?
+        #error_explanation
+          %h2= "Ada #{@user.errors.count} yang salah"
+          %ul
+            - @user.errors.full_messages.each do |em|
+              %li = em
+
+
+
+  .row
+    .span6.offset3
+      .field
+        = f.label :username
+        = f.text_field :username
+
+  .row
+    .span6.offset3
+      .field
+        = f.label :password
+        = f.text_field :password
+
+  .row
+    .span6.offset3
+      .field
+        = f.label :password
+        = f.text_field :password_confirmation
+
+  .row
+    .span6.offset3
+      .field
+        = f.submit "Buat User", :class => "btn btn-large btn-primary", :id=>"create_user"
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        = link_to "Batal", user_index_path, :class=> "btn btn-large btn-danger" 

@@ -5,6 +5,9 @@
 %br
 %hr
 .row
+  .span2.offset10
+    = link_to "User Baru", user_new_path, :class=>"btn btn-large btn-primary", :id=>"new_user"
+.row
   .span8.offset2
     = will_paginate @users
     %table.table.table-bordered#user-table
