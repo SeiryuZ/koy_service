@@ -35,13 +35,21 @@ describe User do
   end
 
   describe "When Username is not present" do 
-    before { @user.username = " " }
+    before { @user =  build(:user, :username => "") }
     it { should_not be_valid }
   end
 
   describe "Password is not present" do
-    before { @user.password = " " }
+    before { @user= build(:user, :password=> "", :password_confirmation => "") }
     it { should_not be_valid }
+  end
+
+  describe "When password and password_confirmation is not present" do
+    before do
+      @user.password = "123"
+      @user.password_confirmation = "!23"
+    end
+    it {should_not be_valid}
   end
 
 

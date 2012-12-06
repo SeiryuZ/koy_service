@@ -4,10 +4,15 @@ class User < ActiveRecord::Base
   attr_accessible  :username
 
   validates :username, presence: true, uniqueness: true
-  validates :password_hash, presence:true
+  validates :password, presence:true, :confirmation => true
+  validates :password_confirmation, :presence => true
 
   def password
-    @password ||= Password.new(password_hash)
+    if not password_hash.nil?
+      @password ||= Password.new(password_hash)
+    else
+      nil
+    end
   end
 
   def password=(new_password)
