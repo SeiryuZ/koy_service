@@ -69,6 +69,30 @@ describe UserController do
     end
   end
 
+
+
+  describe "destroy action" do
+    it "should delete user correctly and redirect to user index_admin" do
+      session[:active_user] = @admin.id
+      post 'destroy', :id=> @user.id
+      expect {User.find(@user.id)}.to raise_error
+      response.should redirect_to(user_index_path)
+    end
+
+    it "should not delete user when not authenticated as admin" do
+      session[:active_user] = @user.id
+      post 'destroy', :id=> @user.id
+      User.find(@user.id).should == @user
+      response.should redirect_to(user_index_path)
+    end
+
+    it "should redirect to root if not logged in" do
+      post 'destroy', :id=> @user.id
+      response.should redirect_to root_path
+    end
+
+  end
+
   describe "GET 'login'" do
     it "returns http success" do
       get 'login'

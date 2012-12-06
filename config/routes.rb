@@ -12,6 +12,8 @@ KoyService::Application.routes.draw do
 
   get "user/login"
 
+  match "user/delete" => "user#destroy"
+
 
   match "logout" => "user#logout", :as => :logout
   match "login" => "user#login", :as => :login

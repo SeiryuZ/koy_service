@@ -21,6 +21,23 @@ class UserController < ApplicationController
   def edit
   end
 
+  def destroy
+    if request.post? &&
+      if @active_user.is_admin? 
+
+        User.destroy(params[:id])
+        flash[:notice] = "User telah dihapus"
+
+      else
+        flash[:notice] = "Anda bukan admin"
+      end
+    else
+      flash[:error] = "Ada Error"
+    end
+
+    redirect_to :action => "index"
+  end
+
   def logout
     session[:active_user] = nil
 
