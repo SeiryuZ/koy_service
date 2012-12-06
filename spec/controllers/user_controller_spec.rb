@@ -3,17 +3,8 @@ require 'spec_helper'
 describe UserController do
 
   before do
-    @user = User.new()
-    @user.username = "admin"
-    @user.password = "passwordadmin"
-    @user.set_admin = true
-    @user.save
-
-    @user2 = User.new()
-    @user2.username = "steven"
-    @user2.password = "password"
-    @user2.set_admin = false
-    @user2.save
+    @user = create(:user)
+    @admin = create(:admin)
   end
 
   describe "GET 'index'" do
@@ -23,13 +14,13 @@ describe UserController do
     end
 
     it "should render index_admin page if logged in as admin" do
-      session[:active_user] = User.find_by_username("admin").id
+      session[:active_user] = @admin.id
       get 'index'
       response.should render_template("index_admin")
     end
 
     it "should render index page if logged in as non admin" do
-      session[:active_user] = User.find_by_username("steven").id
+      session[:active_user] = @user.id
       get 'index'
       response.should render_template("index")
     end
@@ -42,7 +33,7 @@ describe UserController do
     end
 
     it "should render the new user page if logged in" do
-      session[:active_user] = User.find_by_username("admin").id
+      session[:active_user] = @admin.id
       get 'new'
       response.should be_success
     end
@@ -69,7 +60,7 @@ describe UserController do
     end
 
     it "should render the new user page if logged in" do
-      session[:active_user] = User.find_by_username("admin").id
+      session[:active_user] = @admin.id
       response.should be_success
     end
   end
@@ -83,7 +74,7 @@ describe UserController do
 
   describe "GET 'logout'" do
     it "should destroy active user session and redirected to login page" do
-      session[:active_user] = User.find_by_username("admin").id
+      session[:active_user] = @admin.id
       session[:active_user].should_not == nil
       get 'logout'
       session[:active_user].should == nil
@@ -94,16 +85,16 @@ describe UserController do
 
   describe "POST 'login'" do
     it "should redirect to login page if authentication fail" do
-      post 'login', :username => "admin", :password => "password"
+      post 'login', :username => @admin.username, :password => "password"
       response.should redirect_to(root_path)
-      post 'login', :username => "admin", :password => "pa123sswordadmin"
+      post 'login', :username => @admin.username, :password => "pa123sswordadmin"
       response.should redirect_to(root_path)
     end 
 
     it "should redirect to index page if authentication succeed" do
-      post 'login', :username => "admin", :password => "passwordadmin"
+      post 'login', :username => @admin.username, :password => "bar"
       
-      session[:active_user].should == User.find_by_username("admin").id
+      session[:active_user].should == @admin.id
       response.should redirect_to(user_index_path)
     end
 

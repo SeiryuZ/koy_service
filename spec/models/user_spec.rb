@@ -2,12 +2,12 @@ require 'spec_helper'
 
 describe User do
   
+
   before do
-    @user = User.new()
-    @user.username = "admin"
-    @user.password = "passwordadmin"
-    @user.save
+    @user = create(:user)
+    @admin = create(:admin)
   end
+
 
   subject { @user }
 
@@ -46,11 +46,7 @@ describe User do
 
   describe "When Username is already taken" do
     before do 
-      @user = User.new()
-      @user.username = "admin"
-      @user.password = "passwordadmin"
-      @user2 = User.new() 
-      @user2.username = "admin"
+      @user = build(:user, :username => @admin.username)
     end
 
     it { should_not be_valid }
