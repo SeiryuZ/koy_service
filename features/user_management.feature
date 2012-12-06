@@ -50,3 +50,25 @@ Feature: Users Management
     And I fill "new_user_form" with invalid data
     And I click "create_user"
     Then I should see "yang salah"
+
+
+  Scenario: Change user to admin
+    Given the following user exist
+      | username | password | admin |  
+      |  steven  | password | false |  
+      |  admin   |  admin   | true  | 
+    And I am on "home page"
+    When I am authenticated as "admin"
+    And from "steven's row" I click "change_to_admin"
+    Then from "steven's row" I should see "admin" 
+
+
+  Scenario: Change user to normal user
+    Given the following user exist
+      | username | password | admin |  
+      |  steven  | password | false |  
+      |  admin   |  admin   | true  | 
+    And I am on "home page"
+    When I am authenticated as "admin"
+    And from "steven's row" I click "demote_from_admin"
+    Then from "steven's row" I should see "user"
