@@ -43,10 +43,23 @@ describe UserController do
     end
   end
 
-  describe "GET 'create'" do
+  describe "'create' method" do
     it "should redirect to root if not logged in" do
       get 'create'
       response.should redirect_to root_path
+    end
+
+    it "should create user successfully with valid data" do
+      session[:active_user] = @admin.id
+      post 'create', :user =>{ :username => "steven" , :password => "qwe", :password_confirmation => "qwe" }
+      response.should redirect_to user_index_path
+    end
+
+    it "should render the new page when unsuccessful create is initiated" do
+      session[:active_user] = @admin.id
+      post 'create', :user => { :username => "steven" , :password => "qwe", :password_confirmation => "qwe1" }
+      response.should render_template("new")
+
     end
   end
 
@@ -63,7 +76,7 @@ describe UserController do
       response.should redirect_to root_path
     end
 
-    it "should render the new user page if logged in" do
+    it "should render the edit user page if logged in" do
       session[:active_user] = @admin.id
       response.should be_success
     end

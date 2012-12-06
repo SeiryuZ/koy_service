@@ -4,7 +4,7 @@ KoyService::Application.routes.draw do
 
   get "user/new"
 
-  get "user/create"
+
 
   get "user/update"
 
@@ -13,6 +13,7 @@ KoyService::Application.routes.draw do
   get "user/login"
 
   match "user/delete" => "user#destroy"
+  match "user/create" => "user#create"
 
 
   match "logout" => "user#logout", :as => :logout

@@ -13,6 +13,18 @@ class UserController < ApplicationController
   end
 
   def create
+ 
+    @user = User.new(:username => params[:user][:username])
+    @user.password = params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation]
+
+    if @user.save
+      flash[:success] = "User telah berhasil dibuat"
+      redirect_to :action => "index"
+    else
+      render :action => "new"
+    end
+
   end
 
   def update
