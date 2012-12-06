@@ -5,7 +5,11 @@ describe UserController do
   before do
     @user = create(:user)
     @admin = create(:admin)
+
   end
+
+ 
+
 
   describe "GET 'index'" do
     it "should redirect to root if not logged in" do

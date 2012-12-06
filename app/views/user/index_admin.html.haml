@@ -5,7 +5,8 @@
 %br
 %hr
 .row
-  .span4.offset4
+  .span8.offset2
+    = will_paginate @users
     %table.table.table-bordered#user-table
       %thead
         %th
@@ -19,4 +20,7 @@
             %td
               = user.username
             %td
-              = user.is_admin?
+              - if user.is_admin?
+                .myIcon.ok
+              -else
+                .myIcon.no

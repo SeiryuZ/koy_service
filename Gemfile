@@ -11,6 +11,8 @@ gem 'mysql2'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 group :development, :test do
   gem 'mysql2'

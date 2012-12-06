@@ -1,7 +1,7 @@
 class UserController < ApplicationController
   def index
     if @active_user.is_admin?
-      @users = User.find(:all, :limit => 50)
+      @users = User.page(params[:page])
       render "index_admin"
     else
       render "index"
@@ -40,7 +40,7 @@ class UserController < ApplicationController
         flash[:error] = "Maaf, Password anda salah"
         redirect_to root_path
       end
-      
+
     end
 
   end

@@ -11,3 +11,18 @@
  *= require_self
  *= require_tree .
 */
+
+
+.myIcon{
+  height: 47px;
+  width: 50px;
+  background-image: image-path("ok-no.png");
+}
+
+.ok{
+  background-position: 0px 0px;
+}
+
+.no{
+  background-position: 50px 0px;
+}
