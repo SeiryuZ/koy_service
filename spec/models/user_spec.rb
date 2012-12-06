@@ -19,6 +19,7 @@ describe User do
       should respond_to(:password) 
       should respond_to(:set_admin=) 
       should respond_to(:is_admin?)
+      User.should respond_to(:authenticate)
 
     end
 
@@ -63,6 +64,20 @@ describe User do
       @user.set_admin = false
       @user.is_admin?.should == false
       @user.is_admin?.should_not == true
+    end
+
+  end
+
+  describe "When asked to authenticate" do
+
+    it "should return the user object when authenticated" do
+      User.authenticate(@user.username, "bar").should == @user
+      User.authenticate(@admin.username, "bar").should == @admin
+    end
+
+    it "should return false when not authenticated" do
+      User.authenticate(@user.username, "bar123").should == false
+      User.authenticate(@admin.username, "ba123").should == false
     end
 
   end
