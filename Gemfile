@@ -7,7 +7,7 @@ gem 'rails', '3.2.9'
 
 
 gem 'thin'
-gem 'mysql2'
+gem 'pg'
 gem 'haml-rails'
 gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
@@ -15,7 +15,6 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 
 group :development, :test do
-  gem 'mysql2'
   gem 'rspec-rails', '2.11.0'
   gem 'guard-rspec', '1.2.1'
   gem 'factory_girl_rails'
